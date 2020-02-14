@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void freq(int n, int arr[],int key)
+{
+	int beg=0,end=n-1;
+	int mid=(beg+end)/2;
+	int first,last;
+	while(beg!=end)
+	{
+		if(key<=arr[mid])
+		{
+			end=mid;
+		}
+		else beg=mid+1;
+
+		mid=(beg+end)/2;
+	}
+	first=beg;
+
+	beg=0,end=n-1;
+	mid=(beg+end)/2;
+	while(beg!=end)
+	{
+		if(key>=arr[mid])
+		{
+			beg=mid+1;
+		}
+		else end=mid;
+
+		mid=(beg+end)/2;
+	}
+	last=beg-1;
+	
+	if((last-first+1)==0)
+		cout<<"Element not found"<<endl;
+	else
+	{
+		cout<<"The first occurence of "<<key<<" is at index "<<first<<endl;
+		cout<<"The last occurence of "<<key<<" is at index "<<last<<endl;
+		cout<<"Total number of occurences of "<<key<<" : "<<(last-first+1);
+	}
+}
+
+
+int main()
+{
+	int arr[]={1,4,4,6,9,17,17,20,20,23,45,51};
+	int n=sizeof(arr)/sizeof(arr[0]);
+	int key=17;
+	freq(n,arr,key);
+	return 0;
+}
