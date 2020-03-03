@@ -33,7 +33,6 @@ void rotate_binary(int arr[],int n, int key)
         {
             endi=midi;
         }
-
         // right unsorted
         else
         {
