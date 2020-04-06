@@ -1,1 +1,48 @@
 
+#include<iostream>
+using namespace std;
+
+int count_digits(int n)
+{
+    int rem,count=0;
+    while(n!=0)
+    {
+        rem = n%2;
+        if(rem == 1)
+            count++;
+        n = n/2;
+    }
+    if(count%2 == 0)
+        return 1;
+    else
+        return 0;
+}
+int sum_digits(int n)
+{
+    int sum=0;
+    while(n != 0)
+    {
+        sum += n%10;
+        n = n/10;
+    }
+    return sum;
+}
+int main()
+{
+    int n,i,sum=0;
+    cout<<"Enter no of elements"<<endl;
+    cin>>n;
+    int arr[n];
+    cout<<"Enter array elements"<<endl;
+    for(i=0;i<n;i++)
+        cin>>arr[i];
+    for(i=0;i<n;i++)
+    {
+        if(count_digits(arr[i])==1)
+        {
+            sum += sum_digits(arr[i]);
+        }
+    }
+    cout<<"Sum of digits is  "<<sum<<endl;
+    return 0;
+}
