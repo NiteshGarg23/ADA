@@ -42,7 +42,6 @@ void freq(int n, int arr[],int key)
 	}
 }
 
-
 int main()
 {
 	int arr[]={1,4,4,6,9,17,17,20,20,23,45,51};
