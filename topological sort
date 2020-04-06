@@ -1,1 +1,62 @@
 
+#include<iostream>
+using namespace std;
+void topological_check(int v,int visited[],int a[][50],int n,int stack[],int *t)
+{
+    visited[v]=1;
+    int i;
+    for(i=0;i<n;i++)
+    {
+        if(a[v][i]==1 && visited[i]==0)
+            topological_check(i,visited,a,n,stack,t);
+    }
+    stack[++(*t)]=v;
+}
+void topological_sort(int v,int visited[],int a[][50],int n,int stack[],int *t)
+{
+    int i;
+    for(i=0;i<n;i++)
+    {
+        if(visited[i]==0)
+            topological_check(i,visited,a,n,stack,t);
+    }
+}
+int main()
+{
+    int n,i,j;
+    cout<<"Enter no of vertices"<<endl;
+    cin>>n;
+    cout<<"Enter adjacency matrix"<<endl;
+    int a[50][50];
+    int q[n],r=-1,f=0,stack[n],top=-1;
+    int visited[n];
+    for(i=0;i<n;i++)
+    {
+        visited[i]=0;
+        int sum = 0;
+        for(j=0;j<n;j++)
+            cin>>a[i][j];
+            {
+                sum += a[i][j];
+            }
+            if(sum==0)
+                q[++r]=i;
+    }
+    while( f<=r )
+    {
+        int x = q[f++];
+        topological_sort(x,visited,a,n,stack,&top);
+    }
+    for(i=0;i<n;i++)
+    {
+        if(visited[i]==0)
+            topological_sort(i,visited,a,n,stack,&top);
+    }
+    cout<<"Topological sort is "<<endl;
+    while( top != -1)
+    {
+        cout<<stack[top]<<endl;
+        top--;
+    }
+    return 0;
+}
