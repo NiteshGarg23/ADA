@@ -1,1 +1,82 @@
 
+#include<iostream>
+using namespace std;
+
+int bfs(int a[][50],int v,int visited[],int n)
+{
+    int i,x,count=0;
+    int f=0,r=-1;
+    int q[n];
+    q[++r]=v;
+    visited[v]=1;
+    x = q[f++];
+    cout<<endl;
+    cout<<"reachable nodes for vertex "<<v<<endl;
+    cout<<x<<" ";
+    while(1)
+    {
+        for(i=0;i<n;i++)
+        {
+            if(a[x][i]==1 && visited[i]==0)
+            {
+                q[++r]=i;
+                visited[i]=1;
+            }
+        }
+        if(f<=r)
+        {
+            int y = q[f++];
+            cout<<y<<" ";
+            count++;
+        }
+        else
+            break;
+
+    }
+
+return count;
+}
+
+int main()
+{
+    int n,i,j,v,flag=0;
+    cout<<"Enter no of vertices"<<endl;
+    cin>>n;
+    cout<<"Enter adjacency matrix"<<endl;
+    int a[50][50];
+
+    int visited[n],arr[n];
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            cin>>a[i][j];
+    }
+
+    cout<<"Enter starting vertex"<<endl;
+    cin>>v;
+
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            visited[j]=0;
+        int x=bfs(a,i,visited,n);
+        arr[i]=x;
+    }
+    for(i=0;i<n;i++)
+    {
+        if(arr[i]!=(n-1))
+        {
+            flag=1;
+            break;
+        }
+
+    }
+
+   if(flag==1)
+    cout<<"graph not connected"<<endl;
+   else
+    cout<<"graph is connected"<<endl;
+
+
+    return 0;
+}
