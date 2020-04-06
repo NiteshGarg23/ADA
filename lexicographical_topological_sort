@@ -1,1 +1,77 @@
 
+#include<iostream>
+using namespace std;
+int indegree(int v,int a[][50],int n)
+{
+    int count=0;
+    for(int i=0;i<n;i++)
+    {
+        if(a[i][v]==1)
+            count++;
+    }
+    return count;
+}
+void topological_sort(int n,int  visited[],int a[][50])
+{
+    int degree[n],x,q[n],r=-1,f=0,i;
+    for(i=0;i<n;i++)
+    {
+        x = indegree(i,a,n);
+        degree[i]=x;
+    }
+    for(i=0;i<n;i++)
+    {
+        if(degree[i]==0)
+            q[++r]=i;
+    }
+    int count=0,trop[n],j=0,k;
+   for(i=0;i<=r;i++)
+    {
+        int y = q[i];
+        trop[j]=y;
+        j++;
+        for(k=0;k<n;k++)
+        {
+            if(a[y][k]==1)
+            {
+                a[y][k]=0;
+                degree[k]= degree[k] - 1;
+                if(degree[k]==0)
+                    q[++r]=k;
+                count++;
+            }
+        }
+    }
+    if(count != n)
+    {
+        cout<<"Cycle is present"<<endl;
+    }
+    else
+    {
+        cout<<"Lexicographical topological sort is: "<<endl;
+        for(i=0;i<j;i++)
+            cout<<trop[i]<<" ";
+    }
+
+}
+int main()
+{
+    int n,i,j;
+    cout<<"Enter no of vertices"<<endl;
+    cin>>n;
+    cout<<"Enter adjacency matrix"<<endl;
+    int a[50][50];
+    int q[n],r=-1,f=0,stack[n],top=-1;
+    int visited[n];
+    for(i=0;i<n;i++)
+    {
+        visited[i]=0;
+        for(j=0;j<n;j++)
+        {
+              cin>>a[i][j];
+        }
+    }
+   topological_sort(n,visited,a);
+
+    return 0;
+}
