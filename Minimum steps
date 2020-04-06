@@ -1,1 +1,49 @@
 
+#include<bits/stdc++.h>
+using namespace std;
+#define MAX 1e9
+
+int min_jump(int arr[],int n,int fib[],int x)
+{
+
+	int DP[n+2],i,j;
+	DP[0] = 0;
+	for (int i = 1; i <= n + 1; i++)
+		DP[i] = MAX;
+	for (i = 1; i <= n + 1; i++)
+    {
+        if(arr[i - 1] == 1 || i == n + 1)
+		{
+		    for (j = 1; j < x; j++)
+            {
+                if( i - fib[j] >= 0)
+                    DP[i] = min(DP[i],1 + DP[i - fib[j]]);
+            }
+        }
+    }
+	if(DP[n +1] != MAX)
+		return DP[n+1];
+	else
+		return -1;
+}
+int main()
+{
+    int n,i;
+    cout<<"Enter no of elements"<<endl;
+    cin>>n;
+    int arr[n],fib[100];
+    cout<<"Enter array elements"<<endl;
+    for(i=0;i<n;i++)
+        cin>>arr[i];
+    fib[0] = 0;
+	fib[1] = 1;
+	for (i=2;;i++)
+    {
+        fib[i] = fib[i - 1] + fib[i - 2];
+        if(fib[i]>n)
+            break;
+    }
+    cout <<"Minimum jump required is  "<<min_jump(arr, n,fib,i+1)<<endl;
+
+	return 0;
+}
