@@ -18,7 +18,6 @@ int firstocc(int arr[],int starti,int endi,int key)
     }
     else
         return starti;
-
 }
 
 int lastocc(int arr[],int starti,int endi,int key,int n)
