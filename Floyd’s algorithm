@@ -1,1 +1,60 @@
 
+#include<iostream>
+using namespace std;
+
+void shortest_dis(int arr[][50],int n)
+{
+    int d[50][50],i,j,k,INF=999;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            d[i][j]=arr[i][j];
+    }
+    for(k=0;k<n;k++)
+    {
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<n;j++)
+            {
+                if(d[i][j] > (d[i][k] + d[k][j]))
+                    d[i][j]=d[i][k] + d[k][j];
+            }
+        }
+    }
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            {
+                if(d[i][j]== INF)
+                    cout<<"INF"<<"\t";
+                else
+                    cout<<d[i][j]<<"\t";
+            }
+            cout<<endl;
+
+    }
+}
+int main()
+{
+    int n,i,j,INF=9999999;
+    cout<<"Enter no of vertices"<<endl;
+    cin>>n;
+    int arr[50][50];
+    cout<<"Enter adjacency matrix"<<endl;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            cin>>arr[i][j];
+    }
+
+    cout<<"Matrix is"<<endl;
+     for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            cout<<arr[i][j]<<"\t";
+        cout<<endl;
+    }
+    cout<<"Shortest distance matrix for given graph is"<<endl;
+    shortest_dis(arr,n);
+    return 0;
+}
