@@ -1,4 +1,5 @@
 #include<iostream>
+using namespace std;
 
 int euclid_gcd(int m,int n)
 {   int rem;
